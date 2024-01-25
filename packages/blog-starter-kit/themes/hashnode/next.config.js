@@ -52,7 +52,14 @@ const getRedirectionRules = async () => {
 			};
 		});
 
-	return redirects;
+	return [
+    {
+      source: '/:path((?!blogs\/)[^/]+)',
+      destination: '/blogs/:path*',
+      permanent: true
+    },
+    ...redirects
+  ];
 };
 
 /**
