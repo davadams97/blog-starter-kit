@@ -47,7 +47,7 @@ function PublicationSidebarNavLinks(props: IPublicationSidebarNavLinks) {
     <nav className="pb-8">
       <PublicationSidebarNavLinkItem
         href="/"
-        label="Home"
+        label="About me"
         isActive={!!isHomePage}
       />
 
