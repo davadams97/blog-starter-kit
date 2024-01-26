@@ -54,7 +54,7 @@ const getRedirectionRules = async () => {
 
 	return [
     {
-      source: '/:path((?!blogs\/)[^/]+)',
+      source: '/:path((?!blogs)[^/]+)',
       destination: '/blogs/:path*',
       permanent: true
     },
