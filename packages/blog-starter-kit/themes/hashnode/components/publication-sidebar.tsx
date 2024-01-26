@@ -1,14 +1,13 @@
 import { useEffect, useState, useRef, MutableRefObject } from 'react';
 import * as DialogPrimitive from '@radix-ui/react-dialog';
 
-import { useAppContext } from './contexts/appContext';
 import PublicationSidebarNavLinks from './publication-sidebar-nav-links';
 import PublicationSocialLinks from './publication-social-links';
 import PublicationLogo from './publication-logo';
 import { CloseSVG } from './icons/svgs';
 import CustomScrollArea from './scroll-area';
 
-import { Preferences, Publication, PublicationNavbarItem, User } from '../generated/graphql';
+import { Preferences, Publication, PublicationNavbarItem, PublicationNavigationType, User } from '../generated/graphql';
 import { twJoin } from 'tailwind-merge';
 import { returnFocusToElement, blurActiveFocus, doesPublicationHaveSocialLinks } from '../utils/commonUtils';
 
@@ -30,7 +29,11 @@ type Props = {
 
 function PublicationSidebar(props: Props) {
   const { publication, toggleSidebar, isHome, isBadge, currentActiveMenuItemId, isPostPage, triggerRef } = props;
-  const { enabledPages, navbarItems } = publication.preferences;
+  const { enabledPages } = publication.preferences;
+  const navbarItems = [
+    { id: 'blog', label: 'Blog', url: '/blogs', isActive: !currentActiveMenuItemId && isHome, type: PublicationNavigationType.Page },
+    ...publication.preferences.navbarItems,
+  ];
   const [isMounted, setIsMounted] = useState(false);
   const sidebarHeaderRef = useRef<HTMLDivElement>(null);
 
